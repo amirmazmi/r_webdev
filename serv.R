@@ -1,21 +1,26 @@
 
-
 library(httpuv)
 
 PORT <- 8080
 
 http_not_found <- list(
   status=404,
-  body='404 Not Found'
+  headers = list('Content-Type' = 'text/html'),
+  body='<html><h1>404 Not Found</h1></html>'
 )
 http_method_not_allowed <- list(
   status=405,
-  body='405 Method Not Allowed'
+  headers = list('Content-Type' = 'text/html'),
+  body='<html><h1>405 Method Not Allowed</h1></html>'
 )
 
 hello_handler <- list(
-  GET = function (request) list(body="Hello world")
+  GET = function (request){
+      list( status = 200,
+            headers = list('Content-Type' = 'text/html'),
+            body="<html><h1>Hello world</h1></html>")
   # POST = function (request) { ... }
+  }
 )
 
 routes <- list(
